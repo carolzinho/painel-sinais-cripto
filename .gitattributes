@@ -1,0 +1,9 @@
+*.py linguist-detectable=true
+*.js linguist-detectable=true
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
+*.html linguist-detectable=true
+*.css linguist-detectable=true
+*.json linguist-detectable=true
+public/* linguist-vendored=false
+venv/* linguist-vendored=false
