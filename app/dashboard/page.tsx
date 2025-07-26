@@ -21,7 +21,7 @@ import {
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
-// Mock API calls (replace with actual Alpaca API calls)
+// dados mock da alpaca
 async function fetchMarketSentiment(coin: string) {
   const sentiments = ["positive", "neutral", "negative"]
   const randomSentiment = sentiments[Math.floor(Math.random() * sentiments.length)]
@@ -41,7 +41,7 @@ interface NewsItem {
   source: string
   date: string
   url: string
-  symbols: string[] // Added symbols array
+  symbols: string[] // array de symbols
 }
 
 async function fetchCryptoNews(symbol?: string): Promise<NewsItem[]> {
@@ -54,7 +54,7 @@ async function fetchCryptoNews(symbol?: string): Promise<NewsItem[]> {
   return data.news || []
 }
 
-// Mock data for market overview and selected coin details
+// dado mock pra coin selecionada
 const mockMarketOverview = {
   totalMarketCap: "2.5T",
   volume24h: "150B",
@@ -110,7 +110,7 @@ export default function DashboardPage() {
     const newAlerts: Alert[] = []
     const currentCoinDetails = mockCoinDetails[selectedCoin]
 
-    // Mock logic for alerts based on filters
+    // dados mock pra filtro de lógica
     if (volumeFilter && Number(volumeFilter) > 50000 && selectedCoin === "BTC/USDT") {
       newAlerts.push({ id: "btc-volume", coin: "BTC/USDT", criteria: "Volume Alto", active: true })
     }
@@ -150,9 +150,7 @@ export default function DashboardPage() {
           description: `${alert.coin} atende ao critério: ${alert.criteria}`,
           action: <BellRing className="h-5 w-5 text-primary" />,
         })
-        // Play a simple sound (requires user interaction for autoplay)
-        // const audio = new Audio('/path/to/alert.mp3'); // You'd need to provide an audio file
-        // audio.play().catch(e => console.error("Audio play failed:", e));
+ 
       })
     }
     setActiveAlerts(newAlerts)
@@ -171,7 +169,7 @@ export default function DashboardPage() {
   ])
 
   useEffect(() => {
-    const interval = setInterval(checkAlerts, 5000) // Check alerts every 5 seconds
+    const interval = setInterval(checkAlerts, 5000) // Checa alertas a cada 5 seg
     return () => clearInterval(interval)
   }, [checkAlerts])
 
@@ -206,7 +204,7 @@ export default function DashboardPage() {
         </DropdownMenu>
       </div>
 
-      {/* Market Overview */}
+      {/* sumário do mercado */}
       <Card className="lg:col-span-4 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -229,7 +227,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Coin Overview */}
+      {/* sumário moeda */}
       <Card className="lg:col-span-2 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -257,7 +255,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Market Sentiment */}
+      {/* sentimento de mercado */}
       <Card className="lg:col-span-2 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -289,7 +287,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Crypto Chart Embed (TradingView) */}
+      {/* embed tradingview) */}
       <Card className="lg:col-span-2 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -310,7 +308,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Smart Filters */}
+      {/* filtros inteligentes */}
       <Card className="lg:col-span-2 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -466,7 +464,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* News Panel */}
+      {/* painel de notícias */}
       <Card className="lg:col-span-2 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
@@ -477,7 +475,7 @@ export default function DashboardPage() {
           {news.length > 0 ? (
             <div className="space-y-4">
               {news.map((item, index) => {
-                // Check if the news item is relevant to the selected coin
+                // checar se as notícias são relevantes a coin selecionada
                 const isRelevant = item.symbols.some(
                   (s) => s === selectedCoin.replace("/USDT", "") || s === selectedCoin,
                 )
@@ -504,7 +502,7 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Active Alerts Panel */}
+      {/* painel de alertas ativos */}
       <Card className="lg:col-span-4 bg-card border-border shadow-soft rounded-3xl hover:scale-[1.005] transition-transform duration-300 ease-in-out">
         <CardHeader>
           <CardTitle className="text-primary flex items-center gap-2">
